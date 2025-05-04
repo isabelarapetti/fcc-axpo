@@ -42,7 +42,10 @@ export interface DroneRestrictionAttributes {
 }
 
 export interface PopulationDensityAttributes {
-  density?: number | null; // dummy attribute
+  number?: number | null;
+  i_year?: number | null;
+  reli?: number | null;
+  label?: number | null;
 }
 
 interface ResultItem<T> {
