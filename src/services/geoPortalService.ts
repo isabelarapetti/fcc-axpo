@@ -1,7 +1,7 @@
 import {
   GeoApiResponse,
   DroneRestrictionAttributes,
-  PopulationDensityAttributes
+  PopulationDensityAttributes,
 } from "./geoPortalService.types";
 
 export async function fetchDroneRestrictions(
@@ -16,6 +16,7 @@ export async function fetchDroneRestrictions(
       console.error("API  failed:", response.status, response.statusText);
       throw new Error(`API error: ${response.statusText}`);
     }
+
     return (await response.json()) as GeoApiResponse<DroneRestrictionAttributes>;
   } catch (error) {
     console.error("Error fetching drone restrictions:", error);
@@ -35,7 +36,8 @@ export async function fetchPopulationDensity(
       console.error("API fetch failed:", response.status, response.statusText);
       throw new Error(`API error: ${response.statusText}`);
     }
-    return await response.json() as GeoApiResponse<PopulationDensityAttributes>;
+
+    return (await response.json()) as GeoApiResponse<PopulationDensityAttributes>;
   } catch (error) {
     console.error("Error fetching population density:", error);
     throw error;

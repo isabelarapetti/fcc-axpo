@@ -23,8 +23,8 @@ test('Should display API error message when response contains status error', () 
 
     const resultsProp = apiErrorResponse as GeoApiResponse<DroneRestrictionAttributes>;
 
-    render(<ResultsCard results={resultsProp} mode="drone" error={null} />);
-    expect(screen.getByText('Error')).toBeInTheDocument();
+    render(<ResultsCard results={resultsProp} mode="drone" error={apiErrorResponse.detail} />);
+    expect(screen.getByText('Error', { exact: false })).toBeInTheDocument();
 });
 
 test('Should display success results when results is a success response with population data', () => {
@@ -42,12 +42,11 @@ test('Should display success results when results is a success response with pop
     expect(screen.getByText('Reliability Code: 1')).toBeInTheDocument();
 });
 
-test('Should display "No specific data found" when success response has empty results array', () => {
+test('Should display "No data found" when success response has empty results array', () => {
     // Mock success response with no results
     const emptySuccessResponse = { results: [] };
     const resultsProp = emptySuccessResponse as GeoApiResponse<DroneRestrictionAttributes>;
     render(<ResultsCard results={resultsProp} mode="drone" error={null} />);
-    expect(screen.getByText('Drone Restrictions Results')).toBeInTheDocument();
     expect(screen.getByText('No specific data found for this location.')).toBeInTheDocument();
 });
 

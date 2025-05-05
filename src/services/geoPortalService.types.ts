@@ -48,7 +48,7 @@ export interface PopulationDensityAttributes {
   label?: number | null;
 }
 
-interface ResultItem<T> {
+export interface ResultItem<T> {
   layerBodId?: string;
   layerName?: string;
   featureId?: number;

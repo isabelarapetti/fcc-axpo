@@ -11,7 +11,7 @@ function App() {
   const [selectedAsset, setSelectedAsset] = useState<Asset | null>(null);
   const [apiResults, setApiResults] = useState<GeoApiResponse<DroneRestrictionAttributes | PopulationDensityAttributes> | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const [apiError, setApiError] = useState<string | null>(null);
+  const [apiError, setAPIError] = useState<string | null>(null);
 
   const fetchData = async () => {
     if (!selectedAsset) {
@@ -21,7 +21,7 @@ function App() {
 
     // Reset previous results
     setLoading(true);
-    setApiError(null);
+    setAPIError(null);
     setApiResults(null);
 
     try {
@@ -34,18 +34,17 @@ function App() {
       } else {
         data = await fetchPopulationDensity(longitude, latitude);
       }
-      if (data.status === 'error') {
+      if (data.status) {
         setApiResults(data);
+        setAPIError(`Error: ${data.detail} `);
       } else {
         // Set results
         setApiResults(data);
         console.log("API results:", data);
       }
-
-
     } catch (err: unknown) {
       console.error("API eror:", err);
-      setApiError(`Failed to fetch data ${selectedMode}.`);
+      setAPIError(`Failed to fetch data ${selectedMode}.`);
       setApiResults(null);
     } finally {
       setLoading(false);
@@ -68,7 +67,8 @@ function App() {
           {loading ? 'Loading...' : 'Get Information'}
         </button>
 
-        <ResultsCard results={apiResults} error={apiError} />
+
+        <ResultsCard results={apiResults} mode={selectedMode} error={apiError} />
 
       </div>
     </>
