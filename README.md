@@ -1,54 +1,40 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Axpo Asset Inspector
 
-Currently, two official plugins are available:
+Single Page Application (SPA) built using Vite, TypeScript, and React.
+I alse used React testing library and Vitest as a runner.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+The app fetches the Swiss GeoPortal API data (Drone/Population) for asset locations and displays responses/errors.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+I fixed the population density API layer name provided: ch.bfs.volkszaehlungbevoelkerungsstatistik_einwohner to ch.bfs.volkszaehlung-bevoelkerungsstatistik_einwohner. Population response didn't have much info to display though.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+#### Structure & State
+`App.tsx` manages core state (mode, asset, results, loading, error) and orchestrates data fetching. Child components (`ModeSelector`, `AssetSelector`, `ResultsCard`) handle UI and communicate via props/callbacks. 
+For the UI i quickly designed a Figma mockup. and build some simple componets based on that.
+
+[https://www.figma.com/proto/ZwXfHk2Z6hi08kVyUCYKrC/-shadcn-ui---Design-System--Community-?node-id=116-1152&t=FY1zu0DONRM0RIBq-1&scaling=scale-down&content-scaling=fixed](https://www.figma.com/proto/ZwXfHk2Z6hi08kVyUCYKrC/-shadcn-ui---Design-System--Community-?node-id=116-1152&t=FY1zu0DONRM0RIBq-1&scaling=scale-down&content-scaling=fixed)
+
+A planned extension was to add a language switch using React Context for internationalization.
+
+
+#### How to Run
+
+Install dependencies:
+
+```
+npm install
+```
+Start the development server:
+```
+npm run dev
+```
+Run tests:
+
+```
+npm run test
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+

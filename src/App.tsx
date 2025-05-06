@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import { ModeSelector, AssetSelector, ResultsCard } from "./components";
+import { ModeSelector, AssetSelector, ResultsCard, Header } from "./components";
 import { Asset } from "./types/Asset";
 import { GeoApiResponse, DroneRestrictionAttributes, PopulationDensityAttributes } from "./services/geoPortalService.types";
 import { fetchDroneRestrictions, fetchPopulationDensity } from "./services/geoPortalService";
@@ -38,12 +38,11 @@ function App() {
         setApiResults(data);
         setAPIError(`Error: ${data.detail} `);
       } else {
-        // Set results
         setApiResults(data);
         console.log("API results:", data);
       }
     } catch (err: unknown) {
-      console.error("API eror:", err);
+      console.error("API error:", err);
       setAPIError(`Failed to fetch data ${selectedMode}.`);
       setApiResults(null);
     } finally {
@@ -53,18 +52,17 @@ function App() {
 
   return (
     <>
+      <Header />
       <div className="container mx-auto p-4">
-        <h1>Axpo Asset Inspector</h1>
-
         <ModeSelector selectedMode={selectedMode} onModeChange={setSelectedMode} />
         <AssetSelector onSelect={setSelectedAsset} />
 
         <button
           onClick={fetchData}
           disabled={loading || !selectedAsset}
-          className={`mt-4 px-4 py-2 rounded ${loading || !selectedAsset ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 text-white'}`}
+          className={`mt-4 px-4 py-2 w-11/12 sm:w-2/5 mx-auto rounded ${loading || !selectedAsset ? 'bg-secondary cursor-not-allowed' : 'bg-primary text-white'}`}
         >
-          {loading ? 'Loading...' : 'Get Information'}
+          {loading ? 'Loading...' : 'inspect'}
         </button>
 
 
