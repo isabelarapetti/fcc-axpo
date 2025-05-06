@@ -18,14 +18,14 @@ export function ModeSelector({ selectedMode, onModeChange }: ModeSelectorProps) 
                         group flex flex-col items-center justify-center
                         px-4 py-3 rounded-md
                         ${selectedMode === 'drone'
-                            ? 'bg-blue-600 text-white shadow-md'
+                            ? 'bg-primary text-white shadow-md'
                             : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
                         }
                     `}
                     onClick={() => onModeChange('drone')}
                 >
                     <span className="text-sm font-medium mb-1">Drone Restrictions</span>
-                    <DroneIcon className={`h-8 w-8 ${selectedMode === 'drone' ? 'text-white' : 'text-gray-600 group-hover:text-gray-800'}`} />
+                    <DroneIcon className={`h-16 w-16 ${selectedMode === 'drone' ? 'text-white' : 'text-gray-600 group-hover:text-gray-800'}`} />
                 </Button>
 
                 {/* Population Density mode */}
@@ -34,14 +34,14 @@ export function ModeSelector({ selectedMode, onModeChange }: ModeSelectorProps) 
                         group flex flex-col items-center justify-center
                         px-4 py-3 rounded-md
                         ${selectedMode === 'population'
-                            ? 'bg-blue-600 text-white shadow-md'
+                            ? 'bg-primary text-white shadow-md'
                             : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
                         }
                     `}
                     onClick={() => onModeChange('population')}
                 >
-                    <span className="text-sm font-medium mb-1">Population Density</span>
-                    <DensityIcon className={`h-8 w-8 ${selectedMode === 'population' ? 'text-white' : 'text-gray-600 group-hover:text-gray-800'}`} />
+                    <span className="text-sm font-medium mb-3">Population Density</span>
+                    <DensityIcon className={`h-12 w-12 ${selectedMode === 'population' ? 'text-white' : 'text-gray-600 group-hover:text-gray-800'}`} />
                 </Button>
             </div>
         </div>
